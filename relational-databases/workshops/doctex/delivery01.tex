@@ -1,0 +1,186 @@
+\documentclass[11pt,letterpaper]{article}
+\bibliographystyle{amsplain}
+
+\usepackage[utf8x]{inputenc}
+\usepackage{ucs}
+\usepackage[spanish]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{url}
+\usepackage{pstricks}
+\usepackage[affil-it]{authblk}
+
+\author{J. Mauricio Mej{\'i}a Castro\thanks{\tt jesidm.mejiac@utadeo.edu.co}}
+\title{Investigación de Gartner sobre el Mercado de los Sistemas de Bases de Datos Operacionales}
+\affil{Universidad Jorge Tadeo Lozano}
+
+%\newpsobject{grilla}{psgrid}{subgriddiv=1,griddots=10,gridlabels=6pt}
+\begin{document}
+% \cite{Gartner2019}, \cite{Burton2002}, \cite{wiki:Gartner}
+
+\maketitle
+\tableofcontents
+\newpage
+\section{¿Qué es Gartner?}
+	\subsection{La Compañía}
+	Gartner es una firma de asesoramiento e investigación fundada en 1978 cuya %
+	sede principal se encuentra en Stamford, Connecticut (Estados Unidos). %
+	Su negocio consiste en proveer información, asesoría y herramientas a los %
+	principales líderes en TI, finanzas, RR.HH, soporte, servicio al cliente, %
+	entre otros.
+	\par Su objetivo es ofrecer productos de investigación, programas %
+	ejecutivos, asesorías y conferencias a los CIO, gerentes de mercadeo, TI y cadena de abastecimiento. Esta empresa cuenta con 15000 empleados y más de 100 oficinas alrededor del mundo.
+	\par Gartner utiliza Cuadrantes Mágicos ({\em Magic Quadrants}) y Ciclos de Sobre-expectación ({\em Hype Cycles}) para visualizar sus resultados sobre análisis de mercados \cite{wiki:Gartner}.
+	
+	\subsection{Modelos de Investigación en Gartner}
+	La investigación en Gartner se basa en el intercambio de información a través de una comunidad de analistas. El objetivo es construir investigaciones de mercado con fundamentos estadísticamente relevantes. Los analistas toman información de encuestas formales e informales de usuarios y vendedores.
+	\par Gartner utiliza la estrategia {\em stalking horse} en la construcción de gráficos conceptuales que ilustren ciertas hipótesis. Estas gráficas son entonces presentadas a los usuarios, vendedores y otros analistas \cite{Burton2002}.
+	
+	\subsection{Escenarios y Suposiciones Estratégicas}
+	Gartner construye sus estudios de mercado teniendo en cuanta los siguientes conceptos:
+	\begin{itemize}
+	\item {\bf Preguntas Clave}: son preguntas importantes que aun no tienen respuesta, o esta no se muestra de manera obvia.
+	\item {\bf Suposiciones Estratégicas de Planeación o Negocio}: es la mejor respuesta funcional a una Pregunta Clave con una probabilidad asignada.
+	\item {\bf Probabilidades}: es la expresión numérica de la posibilidad de ocurrencia de una respuesta.
+	\end{itemize}
+	\par Los {\em Escenarios} son predicciones a cinco años de algún sector que delinean una cadena proyectada de eventos utilizando las Preguntas Clave y las Suposiciones Estratégicas. Cambian dinámicamente junto con la industria, la tecnología y ciertos eventos específicos del sector. El tema principal de un escenario es el cambio. Los escenarios son la estructura que subyace al \guillemotleft futurismo\guillemotright\ de Gartner. Están orientados a la acción y ofrecen una guía a los clientes de Gartner para que tomen decisiones {\em ahora}.
+	\par Los {\em Problemas Clave} son parte crítica en la arquitectura de investigación de Gartner. Aparecen en todos los entregables y representan una pregunta acerca del futuro cuya respuesta aun no es conocida u obvia, y adicionalmente, se cree que tiene consecuencias significativas para la industria. Se determina de dos maneras: 1) Preguntas que los clientes de Gartner creen que deben ser respondidas acerca de tendencias y direcciones en la tecnología, y 2) Preguntas que los clientes se hacen acerca del futuro. Responder estas Preguntas Claves son el fundamento de la agenda investigativa de los analistas de Gartner.
+	
+	\subsection{Los Cuadrantes Mágicos de Gartner}
+	Los Cuadrantes Mágicos son la representación gráfica de una Suposición Estratégica de Planeación que posiciona a los vendedores en un sector del mercado. Se basa en la {\em Visión Integral} de los vendedores individuales y su {\em Habilidad para Ejecutar} dentro de un mercado dado.
+
+	\begin{center}
+	\psset{unit=0.5cm}
+	\begin{pspicture}(2,2)(28,24) %\grilla
+	\psframe[linewidth=1pt](6,6)(24,22)
+	\psline[linewidth=1pt](6,14)(24,14)
+	\psline[linewidth=1pt](15,6)(15,22)
+	% Jugadores de nicho
+	\rput[c]{U}(10.5,5){Jugadores de Nicho}
+	\rput[c]{U}(10.5,10){\parbox[c][4cm][c]{3.5cm}{Se centra en un pequeño %
+	segmento y lo hace bien o no entiende la dirección del mercado.}}
+	% Visionarios
+	\rput[c]{U}(19.5,5){Visionarios}
+	\rput[c]{U}(19.5,10){\parbox[c][4cm][c]{3.5cm}{Entiende hacia donde va el %
+	mercado, o bien, tiene una visión completa pero no ejecuta bien.}}
+	% Retadores
+	\rput[c]{U}(10.5,23){Retadores}
+	\rput[c]{U}(10.5,18){\parbox[c][4cm][c]{3.5cm}{Ejecuta bien hoy y es capaz de %
+	dominar segmentos grandes, pero aun no entiende la dirección del mercado.}}
+	% Lideres
+	\rput[c]{U}(19.5,23){Líderes}
+	\rput[c]{U}(19.5,18){\parbox[c][4cm][c]{3.5cm}{Ejecuta bien hoy y esta bien %
+	posicionado para el mañana.}}
+	
+	\rput[c]{U}(4,14){\parbox[c][3cm][c]{1.5cm}{\small Habilidad para Ejecutar}}
+	\psline[linewidth=1pt](4,6)(4,12)
+	\psline[linewidth=1pt]{->}(4,16)(4,22)
+	
+	\rput[c]{U}(26,14){\parbox[c][3cm][c]{1.5cm}{\small Enfoque en el hoy}}
+	\psline[linewidth=1pt](26,6)(26,12)
+	\psline[linewidth=1pt]{->}(26,16)(26,22)
+	
+	\rput[c]{U}(15,3){\parbox[c][3cm][c]{2.4cm}{\small Visión Integral}}
+	\psline[linewidth=1pt](6,3)(11.5,3)
+	\psline[linewidth=1pt]{->}(18,3)(24,3)
+	
+	\end{pspicture}
+	\end{center}
+	
+	\begin{itemize}
+	\item {\em Habilidad para Ejecutar}: Esta dimensión empieza a pesar más que la Visión Integral  cuando el vendedor es bueno diciendo las cosas adecuadas, pero no necesariamente las entrega. Incluye los criterios de fortaleza financiera, gestión de I+D, mercadeo, ventas y alianzas.
+	\item {\em Visión Integral}: Gartner identifica cuatro componentes en la medida tangible para comparar las diferentes visiones:
+	\begin{enumerate}
+	\item ¿Tiene el vendedor una visión o plan estratégico?
+	\item ¿Está la visión alineada con las tendencias del sector o industria?
+	\item ¿La visión concuerda con la de Gartner?
+	\item ¿Es la visión lo suficientemente clara para establecer una base amplia instalada en los clientes y a través de la industria, sin la necesidad de abarcarlo todo?
+	\end{enumerate}
+	\end{itemize}
+	
+\section{Estructura del Reporte Gartner}
+	\begin{itemize}
+	\item Suposiciones Estratégicas de Planeación
+	\item Descripción/Definición del Mercado
+	\item Cuadrante Mágico
+	\item Fortalezas y Precauciones de los Vendedores
+		\begin{itemize}
+		\item Alibaba Cloud
+		\item Amazon Web Services
+		\item DataStax
+		\item EnterpriseDB
+		\item Google
+		\item IBM
+		\item InterSystems
+		\item WorkLogic
+		\item Microsoft
+		\item Neo4j
+		\item Oracle
+		\item SAP
+		\item Vendedores Agregados y Retirados
+		\end{itemize}
+	\item Criterios de Inclusión y Exclusión
+		\begin{itemize}
+		\item Menciones Honorables
+		\end{itemize}
+	\item Criterios de Evaluación
+		\begin{itemize}
+		\item Habilidad para Ejecutar
+		\item Visión Integral
+		\item Descripciones del Cuadrante
+		\begin{itemize}
+			\item Líderes
+			\item Retadores
+			\item Visionarios
+			\item Jugadores de Nicho
+		\end{itemize}
+		\end{itemize}
+	\item Contexto
+	\item Resumen del Mercado
+	\item Evidencia
+	\item Nota 1 --- DBMS no relacionales
+	\item Nota 2 --- Definición de Carga de Trabajo de OPDBMS
+	\end{itemize}
+\section{Líderes en Soluciones ODBMS según Gartner}
+Según el reporte Gartner, los líderes en el mercado de OPDBMS son Amazon Web Services, Google, InterSystems, Microsoft, Oracle y SAP. Cada una de estas empresas ofrece varios productos, algunas con más énfasis en soluciones {\em cloud-based} que en soluciones {\em on-premise} (e.g. AWS). Mientras que otras evidencian una adopción lenta de soluciones {\em cloud-based} (como InterSystems y SAP).
+
+	\subsection{Fortalezas y Precauciones de los Vendedores en el Cuadrante Líder}
+	Las compañías en el cuadrante de los Líderes, consideradas las más exitosas en el mercado evaluado por el reporte de Gartner, tienen varias características en común. Lograron balancear en sus productos la simpleza en la implementación, el desempeño de las operaciones, y la integración con productos de otros vendedores. Asimismo ofrecieron facilidades en la migración desde otros DBMS \cite{Gartner2019} e interacción con productos de otros vendedores.
+		\subsubsection{Amazon Web Services (AWS)}
+		\begin{itemize}
+		\item {\bf Fortalezas}:
+		AWS tiene la ventaja de tener varios servicios ya establecidos como Amazon Aurora, Amazon DynamoDB y Amazon Neptune que continúan creciendo. En 2019, AWS agregó nuevos servicios como Amazon QLDB y Amazon Timestream. Muchos de sus clientes destacaron la facilidad en la migración desde servicios {\em on-premise} hacia {\em cloud-based}. Gartner destacó su innovacíon y la inclusión de nuevas características inspiradas en la demanda de sus clientes como la compatibilidad de DocumentDB con MongoDB. Adicionalmente, mantiene una base de cientes leales que recomiendan activamente sus productos, particularmente, concuerdan en la facilidad de configuración y uso, la flexibilidad, la elección de múltiples servicios y la innovación junto con la calidad del soporte.
+		\item {\bf Precauciones}: Los clientes temen la creciente competencia entre Amazon y AWS, además se evidencia cierto estancamiento en el mercado Europeo por razones que Gartner aún desconoce. Algunos de sus clientes advierten la falta de ciertas funcionalidades relacionadas con multi-regiones y {\em autosharding}. Además, la solución dbPaaS de AWS tiende a carecer de soporte esencial cuando se crece en escala. Algunos de sus clientes evidencian también la carencia de soluciones {\em on-premise} y esto ha implicado un lento crecimiento en despliegues híbridos y {\em multicloud}.
+		\end{itemize}
+		\subsubsection{Google}
+		\begin{itemize}
+		\item {\bf Fortalezas}: Gartner destaca la fuerza de Google en clientes empresariales y la facilidad de uso de Google Cloud Platform (GCP). También destaca el soporte temprano para la memoria persistente Intel Optane DC (característica que comparte con Oracle). Sus clientes se muestran satisfechos con los costos y el incremento en la calidad del soporte que venía de registrar calificaciones muy bajas.
+		\item {\bf Precauciones}: La falta de funcionalidades relacionadas con respaldos automáticos, auditoría, optimización de consultas y controles en la tarifa es señalada de forma recurrente por varios clientes de GCP. Señalan a se vez la falta de capacidades para el monitoreo de actividades en base de datos. Gartner señala que aún falta mejorar la advertencia del mercado hacia GCP.
+		\end{itemize}
+		\subsubsection{InterSystems}
+		\begin{itemize}
+		\item {\bf Fortalezas}: Los productos de InterSystems son destacados por su velocidad y su DBMS multi-modelo (que soporta los modelos no relacional y de objetos). Gartner destaca el trabajo realizado en mercadeo, pues hasta hace pocos años, InterSystems era una empresa conocida exclusivamente en el sector salud y ahora muestra buen crecimiento en otros sectores como el de los servicios financieros. Muchos de sus clientes destacan la profesionalidad de su servicio y soporte. Mantiene una base de clientes muy leales que en su mayoría no tienen pensado cambiar de plataforma en un futuro próximo.
+		\item {\bf Precauciones}:
+		Esta empresa ha tenido poco crecimiento en los servicios {\em cloud-based}, en parte debido a ciertas preocupaciones en cuanto a la seguridad de las nubes públicas. Aunque ha mejorado en cuanto a temas de reconocimiento, aún sigue siendo una compañía desconocida fuera del sector salud. Algunos de sus productos requieren habilidades que aún no cuentan con amplia oferta.
+		\end{itemize}
+		\subsubsection{Microsoft}
+		\begin{itemize}
+		\item {\bf Fortalezas}: Gartner destaca el pronunciado crecimiento de los ingresos relacionados con productos {\em cloud-based} (aumentaron 31\% en 2018). Microsoft asegura tener 5 millones de instancias relacionales de Azure, 1 millon de migraciones y 100 billones de transacciones al día en su DBMS no relacional Azure Cosmos DB. Sus clientes destacan la facilidad en la programación, el buen soporte, la completa documentación y el buen servicio. A Cosmos DB se le adicionaron API para Cassandra, etcd, Gremlin, HBase y MongoDB. Además, se tiene ahora facilidades para Python y R en Azure SQL.
+		\item {\bf Precauciones}:
+		Sus clientes manifiestan preocupaciones en los incrementos de los precios. Además ciertos clientes entrevistados por Gartner manifiestan cierta inconformidad con los productos liberados de forma temprana que los hace sentirse como {\em beta testers}. Por otro lado, existen algunos desafíos operativos relacionados con cierta inconsistencia en el mecanismo de autenticación a través de varios de sus productos y la posibilidad de realizar análisis de desempeño del sistema.
+		\end{itemize}
+		\subsubsection{Oracle}
+		\begin{itemize}
+		\item {\bf Fortalezas}: Gartner hace énfasis en la innovación de Oracle destacando su producto Oracle Autonomous Database. Este producto ha creado prácticamente un estándar nuevo de dbPaaS. Se destaca también la adopción temprana de la tecnología Intel Optane DC en {\em Exadata Storage Services} para {\em Exadata X8}. Gran parte de sus cliente destacan la alta velocidad en distribución, gestión de seguridad, y las características de seguridad de DataSafe. Obtuvo la puntuación más alto en temas relacionados con la alta disponibilidad y recuperación de desastres. Sus clientes se muestran satisfechos con los productos de Oracle.
+		\item {\bf Precauciones}: La competencia en los servicios {\em cloud-based} está comenzando a crecer. Algunos de sus clientes muestran cierta preocupación con la complejidad de las licencias y tarifas.
+		\end{itemize}
+		\subsubsection{SAP}
+		\begin{itemize}
+		\item {\em Fortalezas}: Cuenta con un producto (SAP HANA) muy destacado principalmente por su estabilidad, su facilidad en migración y su simpleza; con una sola base de datos que combina analítica y transacciones (transacciones aumentadas). Muchos clientes destacan de forma positiva el rediseño de sus procesos de negocio antes de adoptar SAP.
+		\item {\em Precauciones}: Las soluciones de SAP son relativamente costosas, pero muchos de sus clientes se muestran razonables al pagar dichos costos pues sienten que están adquiriendo productos confiables y simples de utilizar. Existen algunos dificultades para actualizar el sistema. SAP es una compañía que tardó en llegar al sector de los servicios {\em cloud-based} y aún está por verse su capacidad de responder ante los otros grandes competidores que llevan más tiempo y han captado una porción más amplia del mercado.
+		\end{itemize}
+	
+\bibliography{sources}
+
+\end{document}

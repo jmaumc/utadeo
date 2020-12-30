@@ -1,0 +1,147 @@
+\documentclass[11pt,letterpaper,landscape]{article}
+
+\usepackage[utf8x]{inputenc}
+\usepackage{ucs}
+\usepackage[spanish]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{pstricks}
+\usepackage[affil-it]{authblk}
+\usepackage{layout}
+\usepackage{nopageno}	% To hide page numbering
+
+
+\hoffset-2in
+
+\newpsobject{grilla}{psgrid}{subgriddiv=1,griddots=10,gridlabels=6pt}
+\begin{document}
+
+	\enlargethispage*{1cm}
+	
+	\begin{flushleft}
+	{\bf Taller No. 2 - Normalización} \\
+	UTADEO - MIAD - Sistemas de Bases de Datos Relacionales \\
+	Neiro Culma, Jesid M. Mejía y Cristian Quebrada
+	\end{flushleft}
+
+	
+	
+	\begin{center}
+	\psset{unit=0.5cm}
+	\begin{pspicture}(1,4)(42,27) %\grilla
+		
+		% Entity ESTUDIANTE
+		\psframe[linewidth=1pt,framearc=0.3](2,26)(11,19)
+		% Title
+		\rput[c]{U}(6.5,25){USUARIO}
+		% Attribute list
+		\rput[l]{U}(3,23.5){\# cod\_usuario}
+		\rput[l]{U}(3,22.5){$\ast$\ \ apellido}
+		\rput[l]{U}(3,21.5){$\ast$\ \ nombre}
+		\rput[l]{U}(3,20.5){$\ast$\ \ identificacion}
+		
+		% Entity PERFIL
+		\psframe[linewidth=1pt,framearc=0.3](2,14)(11,9)
+		% Title
+		\rput[c]{U}(6.5,13){PERFIL}
+		% Attribute list
+		\rput[l]{U}(3,11.5){\# cod\_perfil}
+		\rput[l]{U}(3,10.5){$\ast$\ \ descripcion\_perfil}
+		
+		% Entity CURSO
+		\psframe[linewidth=1pt,framearc=0.3](19,22)(26.3,14)
+		% Title
+		\rput[c]{U}(22.7,21){CURSO}
+		% Attribute list
+		\rput[l]{U}(20,19.5){\# cod\_curso}
+		\rput[l]{U}(20,18.5){$\ast$\ \ nombre}
+		\rput[l]{U}(20,17.5){$\circ$\ \ nro\_creditos}
+		\rput[l]{U}(20,16.5){$\ast$\ \ fecha\_inicio}
+		\rput[l]{U}(20,15.5){$\circ$\ \ fecha\_fin}
+		
+		% Entity MATRICULA
+		\psframe[linewidth=1pt,framearc=0.3](31,26)(41,21)
+		% Title
+		\rput[c]{U}(36,25){MATRICULA}
+		% Attribute list
+		\rput[l]{U}(32,23.5){\# cod\_matricula}
+		\rput[l]{U}(32,22.5){$\ast$\ \ descripcion\_matricula}
+
+		% Entity DEPARTAMENTO
+		\psframe[linewidth=1pt,framearc=0.3](19,10)(29,5)
+		% Title
+		\rput[c]{U}(24,9){DEPARTAMENTO}
+		% Attribute list
+		\rput[l]{U}(20,7.5){\# cod\_departamento}
+		\rput[l]{U}(20,6.5){$\ast$\ \ descripcion\_matricula}
+		
+		% Relationship between USER and PERFIL
+		\psline[linewidth=1pt]{-}(6.5,19)(6.5,16.8)
+		\psline[linewidth=1pt,linestyle=dashed]{-}(6.5,18)(6.5,14)
+		% Pate'gallina
+		\psline[linewidth=1pt]{-}(6,19)(6.5,18.5)(7,19)
+		% transferible
+		\psline[linewidth=1pt]{-}(6,18.5)(7,18.5)
+		% Labels
+		\rput[l]{U}(7.5,15){clasifica a}
+		\rput[l]{U}(7.5,18){se clasifica por}
+		
+		% Relationship between USUARIO and MATRICULA
+		\psline[linewidth=1pt,linestyle=dashed]{-}(11,24.5)(21.5,24.5)
+		\psline[linewidth=1pt]{-}(21.5,24.5)(31,24.5)
+		% Pate'gallina sign
+		\psline[linewidth=1pt]{-}(31,25)(30.5,24.5)(31,24)
+		% Transferible sign
+		\psline[linewidth=1pt]{-}(30.5,25)(30.5,24)
+		% Labels
+		\rput[l]{U}(12,25.5){aparece en}
+		\rput[r]{U}(30,25.5){contiene}
+		
+		
+		% Relationship between USUARIO and DEPARTAMENTO
+		\psline[linewidth=1pt]{-}(11,20.5)(15.5,20.5)(15.5,14)
+		\psline[linewidth=1pt,linestyle=dashed]{-}(15.5,14)(15.5,6.5)(19,6.5)
+		% Pate'gallina
+		\psline[linewidth=1pt]{-}(11,21)(11.5,20.5)(11,20)
+		% transferible
+		\psline[linewidth=1pt]{-}(11.5,21)(11.5,20)
+		% Labels
+		\rput[l]{U}(12,21.5){pertenece a}
+		\rput[r]{U}(18.5,5.5){contiene}
+		
+		% Relationship between USUARIO and CURSO
+		\psline[linewidth=1pt,linestyle=dashed]{-}(11,22.5)(17,22.5)(17,18.5)(19,18.5)
+		% Pate'gallina
+		\psline[linewidth=1pt]{-}(19,19)(18.5,18.5)(19,18)
+		% Labels
+		\rput[l]{U}(12,23.5){dicta}
+		\rput[c]{U}(17.4,17){\parbox[c][1.8cm][c]{1.5cm}{es dictado por}}
+
+		% Relationship between CURSO and MATRICULA
+		\psline[linewidth=1pt,linestyle=dashed]{-}(26.2,18.5)(32,18.5)
+		\psline[linewidth=1pt]{-}(32,18.5)(36,18.5)(36,21)
+		% Pate'gallina
+		\psline[linewidth=1pt]{-}(35.5,21)(36,20.5)(36.5,21)
+		% Transferible
+		\psline[linewidth=1pt]{-}(35.5,20.5)(36.5,20.5)
+		% Labels
+		\rput[l]{U}(27,17.5){aparece en}
+		\rput[l]{U}(37,20){contiene}
+		
+		% Relationship between DEPARTAMENTO and CURSO
+		\psline[linewidth=1pt]{-}(22.5,14)(22.5,12)
+		\psline[linewidth=1pt,linestyle=dashed]{-}(22.5,12)(22.5,10)
+		% Pate'gallina
+		\psline[linewidth=1pt]{-}(22,14)(22.5,13.5)(23,14)
+		% Transferible
+		\psline[linewidth=1pt]{-}(22,13.5)(23,13.5)
+		% Labels
+		\rput[l]{U}(23.5,13){ofrece}
+		\rput[l]{U}(23.5,11){es ofrecido por}
+		
+	\end{pspicture}
+	\end{center}	
+
+\end{document}
+

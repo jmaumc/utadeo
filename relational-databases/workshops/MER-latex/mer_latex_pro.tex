@@ -1,0 +1,145 @@
+\documentclass{article}
+\usepackage{array}
+\renewcommand{\arraystretch}{1.1}
+\usepackage{tikz}
+\usetikzlibrary{shapes.multipart}
+\usetikzlibrary{positioning}
+\usetikzlibrary{shadows}
+\usetikzlibrary{calc}
+
+\usepackage{pdflscape}
+
+% code for "one to omany", etc. is taken from https://tex.stackexchange.com/q/141797/101651
+\makeatletter
+\pgfarrowsdeclare{crow's foot}{crow's foot}
+{
+    \pgfarrowsleftextend{+-.5\pgflinewidth}%
+    \pgfarrowsrightextend{+.5\pgflinewidth}%
+}
+{
+    \pgfutil@tempdima=0.6pt%
+    \pgfsetdash{}{+0pt}%
+    \pgfsetmiterjoin%
+    \pgfpathmoveto{\pgfqpoint{0pt}{-9\pgfutil@tempdima}}%
+    \pgfpathlineto{\pgfqpoint{-13\pgfutil@tempdima}{0pt}}%
+    \pgfpathlineto{\pgfqpoint{0pt}{9\pgfutil@tempdima}}%
+    \pgfpathmoveto{\pgfqpoint{0\pgfutil@tempdima}{0\pgfutil@tempdima}}%
+    \pgfpathmoveto{\pgfqpoint{-8pt}{-6pt}}% 
+    \pgfpathlineto{\pgfqpoint{-8pt}{-6pt}}%  
+    \pgfpathlineto{\pgfqpoint{-8pt}{6pt}}% 
+    \pgfusepathqstroke%
+}
+
+\pgfarrowsdeclare{omany}{omany}
+{
+    \pgfarrowsleftextend{+-.5\pgflinewidth}%
+    \pgfarrowsrightextend{+.5\pgflinewidth}%
+}
+{
+    \pgfutil@tempdima=0.6pt%
+    \pgfsetdash{}{+0pt}%
+    \pgfsetmiterjoin%
+    \pgfpathmoveto{\pgfqpoint{0pt}{-9\pgfutil@tempdima}}%
+    \pgfpathlineto{\pgfqpoint{-13\pgfutil@tempdima}{0pt}}%
+    \pgfpathlineto{\pgfqpoint{0pt}{9\pgfutil@tempdima}}%
+    \pgfpathmoveto{\pgfqpoint{0\pgfutil@tempdima}{0\pgfutil@tempdima}}%  
+    \pgfpathmoveto{\pgfqpoint{0\pgfutil@tempdima}{0\pgfutil@tempdima}}%
+    \pgfpathmoveto{\pgfqpoint{-6pt}{-6pt}}% 
+    \pgfpathcircle{\pgfpoint{-11.5pt}{0}} {3.5pt}
+    \pgfusepathqstroke%
+}
+
+\pgfarrowsdeclare{one}{one}
+{
+    \pgfarrowsleftextend{+-.5\pgflinewidth}%
+    \pgfarrowsrightextend{+.5\pgflinewidth}%
+}
+{
+    \pgfutil@tempdima=0.6pt%
+    \pgfsetdash{}{+0pt}%
+    \pgfsetmiterjoin%
+    \pgfpathmoveto{\pgfqpoint{0\pgfutil@tempdima}{0\pgfutil@tempdima}}%
+    \pgfpathmoveto{\pgfqpoint{-6pt}{-6pt}}% 
+    \pgfpathlineto{\pgfqpoint{-6pt}{-6pt}}%  
+    \pgfpathlineto{\pgfqpoint{-6pt}{6pt}}% 
+    \pgfpathmoveto{\pgfqpoint{0\pgfutil@tempdima}{0\pgfutil@tempdima}}%
+    \pgfpathmoveto{\pgfqpoint{-8pt}{-6pt}}% 
+    \pgfpathlineto{\pgfqpoint{-8pt}{-6pt}}%  
+    \pgfpathlineto{\pgfqpoint{-8pt}{6pt}}%    
+    \pgfusepathqstroke%
+}
+\makeatother
+
+\tikzset{%
+    pics/entity/.style n args={3}{code={%
+        \node[draw,
+        rectangle split,
+        rectangle split parts=2,
+        text height=1.5ex,
+        ] (#1)
+        {#2 \nodepart{second}
+            \begin{tabular}{>{\raggedright\arraybackslash}p{8.5em}}
+                #3
+            \end{tabular}
+        };%
+    }},
+    pics/entitynoatt/.style n args={2}{code={%
+        \node[draw,
+        text height=1.5ex,
+        ] (#1)
+        {#2};%
+    }},
+    zig zag to/.style={
+        to path={(\tikztostart) -| ($(\tikztostart)!#1!(\tikztotarget)$) |- (\tikztotarget)}
+    },
+    zig zag to/.default=0.5,   
+    one to one/.style={
+        one-one, zig zag to
+    },
+    one to oone/.style={            % I do not how to make "one to Optional-one" rel
+        one-one, zig zag to
+    },
+    one to many/.style={
+        one-crow's foot, zig zag to,
+    },
+    one to omany/.style={
+        one-omany, zig zag to
+    }
+}
+
+\begin{document}
+
+\begin{landscape}
+    \begin{center}
+        \begin{tikzpicture}
+            \pic {entity={A}{Entity A}{%
+                attribute 1 \\
+                attribute 2 \\        
+                ... \\
+                attribute i
+            }};
+            \pic[right=7em of A] {entity={AB}{Entity A for Entity B}{%
+                attribute 1 \\
+                attribute 2
+            }};
+            \pic[right=7em of AB] {entity={B}{Entity B}{%
+                attribute 1 \\
+                attribute 2 \\        
+                ... \\
+                attribute i
+            }};
+            \pic[below=16ex of B] {entity={C}{Entity C}{%
+                attribute 1    
+            }};
+            \pic[below=15ex of AB] {entitynoatt={C1}{Entity C\_1}};
+            \pic[below=9ex of C1] {entitynoatt={C2}{Entity C\_2}};
+            \draw[one to omany] (A.east) -- node[above]{\footnotesize is in} (AB.west);
+            \draw[one to omany] (B.west) -- node[above]{\footnotesize is in} (AB.east);
+            \draw[one to one] (B.south) -- node[right]{\footnotesize is in} (C.north);
+            \draw[one to oone] (C.west) -| ($(C.west)!.5!(C1.east)$) |- node[above]{\footnotesize is in} (C1.east);  % Make "oone" rel
+            \draw[one to oone] (C.west) -| ($(C.west)!.5!(C2.east)$) |- node[below]{\footnotesize is in} (C2.east);  % Make "oone" rel
+            \end{tikzpicture}
+    \end{center}
+\end{landscape}
+
+\end{document}
