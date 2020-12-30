@@ -1,0 +1,260 @@
+# UseR! 2015 tutorial: Bayesian Data Analysis, live coding
+# Rasmus Bååth
+# July 2, 2015
+# Here are the scripts that were "live coded" during the tutorial, all relating to the fish capture re-capture problem. 
+
+# -------------------------------------------------------------------
+# Original capture re-capture using approximate Bayesian Computation
+
+n_draw <- 100000
+
+# Defining and drawing from the prior distribution
+n_fish <- sample(20:250, n_draw, replace = TRUE)
+n_fish
+
+# Histogram
+hist(n_fish)
+
+# Defining the generative model
+pick_fish <- function(n_fish) {
+  fish <- rep(0:1, c(n_fish - 20, 20))
+  sum(sample(fish, 20))
+}
+
+pick_fish(80)
+pick_fish(20)
+pick_fish(1000)
+
+# Simulating the data
+n_marked <- rep(NA, n_draw)
+for(i in 1:n_draw) {
+  n_marked[i] <- pick_fish(n_fish[i])
+}
+n_marked
+
+# Filtering out those parameter values that didn't result in the
+# data that we actually observed
+post_fish <- n_fish[n_marked == 5]
+
+hist(post_fish)
+length(post_fish)
+
+# The posterior distribution showing the probability of different number of fish
+# (binning here in bins of 20 just make the graph easier to interpret)
+barplot(table(cut(post_fish, seq(0, 250, 20))) / length(post_fish), col = "salmon")
+
+# We can evaluate the usual statistics from the posterior
+mean(post_fish)
+sd(post_fish)
+quantile(post_fish, c(0.5,0.95))
+
+# -------------------------------------------------------------------
+# Modified model that accounts for that marked fish get "shy"
+
+n_draw <- 100000
+n_fish <- sample(20:250, n_draw, replace = TRUE)
+
+# This is the only part of the code that has changed from the original version above.
+pick_fish <- function(n_fish) {
+  fish <- rep(0:1, c(n_fish - 20, 20))
+  prob_pick <- ifelse(fish == 0, 1.0, 0.5)
+  sum(sample(fish, 20, prob = prob_pick))
+}
+
+n_marked <- rep(NA, n_draw)
+for(i in 1:n_draw) {
+  n_marked[i] <- pick_fish(n_fish[i])
+}
+
+post_fish <- n_fish[n_marked == 5]
+
+hist(post_fish)
+length(post_fish)
+
+barplot(table(cut(post_fish, seq(0, 250, 20))) / length(post_fish), col = "salmon")
+
+# We can evaluate the usual statistics from the posterior
+mean(post_fish)
+sd(post_fish)
+quantile(post_fish, c(0.5,0.95))
+
+# -------------------------------------------------------------------
+# Modified model that accounts for the "expert" opinion of the fisherman
+
+n_draw <- 100000
+
+# This is the only part of the code that has changed from the original version above.
+n_fish <- rnbinom(n_draw, mu = 200 - 20, size = 4) + 20
+hist(n_fish)
+mean(n_fish)
+
+pick_fish <- function(n_fish) {
+  fish <- rep(0:1, c(n_fish - 20, 20))
+  prob_pick <- ifelse(fish == 0, 1.0, 0.5)
+  sum(sample(fish, 20, prob = prob_pick))
+}
+
+n_marked <- rep(NA, n_draw)
+for(i in 1:n_draw) {
+  n_marked[i] <- pick_fish(n_fish[i])
+}
+
+post_fish <- n_fish[n_marked == 5]
+
+hist(post_fish)
+
+length(post_fish)
+
+barplot(table(cut(post_fish, seq(0, 250, 20))) / length(post_fish), col = "salmon")
+
+# ----------------------------------------------------------------------
+# Profit
+
+profit <- pmin(post_fish, 80)*100 - (post_fish - 80 < 50)*10000
+hist(profit)
+
+hist(profit, breaks = seq(-10000, 10000, 1000),col = "green")
+mean(profit)
+
+# --------------------------------------------------------------------
+
+# Bayesian update (actualización bayesiana)
+# Two capture/re-capture experiments, 20 fishes initially captured
+# and marked in each experiment, and no shy fishes: 
+# In all experiments 5 of 20 fishes re-captured were marked
+
+# ----- 1st experiment (this is the same as the first code) -----
+
+n_draw <- 100000
+
+# Defining and drawing from the prior distribution (uniform)
+n_fish <- sample(20:250, n_draw, replace = TRUE)
+n_fish
+
+# Histogram
+hist(n_fish)
+
+# Defining the generative model
+pick_fish <- function(n_fish) {
+  fish <- rep(0:1, c(n_fish - 20, 20))
+  sum(sample(fish, 20))
+}
+
+pick_fish(80)
+pick_fish(20)
+
+# Simulating the data
+n_marked <- rep(NA, n_draw)
+for(i in 1:n_draw) {
+  n_marked[i] <- pick_fish(n_fish[i])
+}
+n_marked
+
+# Filtering out those parameter values that didn't result in the
+# data that we actually observed
+
+post_fish <- n_fish[n_marked == 5]
+
+hist(post_fish)
+length(post_fish)
+
+# The posterior distribution showing the probability of different number of fish
+# (binning here in bins of 20 just make the graph easier to interpret)
+barplot(table(cut(post_fish, seq(0, 250, 20))) / length(post_fish), col = "salmon")
+
+mean(post_fish)
+sd(post_fish)
+
+# ----- 2nd experiment (new code, but similar!) ----
+
+# previous posterior is the new prior; sample from it
+
+n_fish <- sample(post_fish, n_draw, replace = TRUE)
+
+n_draw = length(n_fish)
+n_draw
+
+# Defining the generative model (this does not change)
+pick_fish <- function(n_fish) {
+  fish <- rep(0:1, c(n_fish - 20, 20))
+  sum(sample(fish, 20))
+}
+
+n_marked <- rep(NA, n_draw)
+for(i in 1:n_draw) {
+  n_marked[i] <- pick_fish(n_fish[i])
+}
+
+post_fish <- n_fish[n_marked == 5]
+length(post_fish)
+
+hist(post_fish)
+barplot(table(cut(post_fish, seq(0, 250, 20))) / length(post_fish), col = "salmon")
+
+mean(post_fish)
+sd(post_fish)
+
+# ----------------------------------------------------------------------
+# The hypergeometric distribution is used
+# as it implements the same process as the fish picking model.
+
+n_draw <- 100000
+
+# Defining and drawing from the prior distribution (uniform)
+n_fish <- sample(20:250, n_draw, replace = TRUE)
+
+# Histogram
+hist(n_fish)
+
+# Defining the generative model and its simulation 
+# from the hypergeometric distribution
+n_marked <- rep(NA, n_draw)
+for(i in 1:n_draw) {
+  n_marked[i] <- rhyper(1, m = 20, n=n_fish[i] -20, k=20)
+}
+n_marked
+
+# Filtering out those parameter values that didn't result in the
+# data that we actually observed
+post_fish <- n_fish[n_marked == 5]
+hist(post_fish)
+length(post_fish)
+
+# The posterior distribution showing the probability of different number of fish
+# (binning here in bins of 20 just make the graph easier to interpret)
+barplot(table(cut(post_fish, seq(0, 250, 20))) / length(post_fish), col = "salmon")
+mean(post_fish)
+sd(post_fish)
+quantile(post_fish,c(0.5,0.95))
+
+# ----------------------------------------------------------------------
+# A JAGS implementation of the original model
+# Here the dhyper distribution is used as it implements the same process as the fish picking model.
+
+install.packages("rjags")
+library(rjags)
+
+data_list <- list(
+  n_picked = 20,
+  n_unmarked = 20 - 5)
+
+model_string <- "
+model {
+n_fish_real   ~ dunif(0, 250)
+n_fish <- round(n_fish_real)
+n_unmarked ~ dhyper(n_fish - n_picked, n_picked, n_picked, 1)
+}
+"
+
+jags_model <- jags.model(textConnection(model_string), data = data_list)
+
+samples <- coda.samples(jags_model, c("n_fish"), n.iter = 3000)
+plot(samples)
+
+s_mat <- as.matrix(samples)
+
+# The probability that there are more than a 100 fish
+mean(s_mat[,"n_fish"] > 100)
+
+
+

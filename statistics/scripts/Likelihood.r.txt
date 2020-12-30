@@ -1,0 +1,121 @@
+
+#Fitting a Model by Maximum Likelihood
+#(by Andrew B. Collier https://datawookie.netlify.com/blog/2013/08/fitting-a-model-by-maximum-likelihood/)
+
+
+#1. Fitting a normal distribution
+
+#First we generate some data.
+
+set.seed(1001)
+N <- 100
+x <- rnorm(N, mean = 3, sd = 2)
+x
+
+mean(x)
+sd(x)
+
+#Then we formulate the log-likelihood function.
+
+LL <- function(mu, sigma) {
+  R = dnorm(x, mu, sigma)
+  -sum(log(R))
+}
+
+#And apply MLE to estimate the two parameters (mean and standard deviation) 
+#for which the normal distribution best describes the data.
+
+install.packages("stats4")
+library(stats4)
+mle(LL, start = list(mu = 1, sigma=1))
+
+#Those warnings are a little disconcerting! 
+#They are produced when negative values are attempted for the standard deviation.
+
+dnorm(x, 1, -1)
+
+#We can simply ignore the warnings
+LL <- function(mu, sigma) {
+  R = suppressWarnings(dnorm(x, mu, sigma))
+  -sum(log(R))
+  }
+
+mle(LL, start = list(mu = 1, sigma=1))
+mean(x)
+sd(x)
+
+#A note of caution: if your initial guess for the parameters is too far off then things can go seriously wrong!
+mle(LL, start = list(mu = 0, sigma=1))
+
+#summary shows the standard errors for these parameters, logLik extracts the log-likelihood value
+fit <- mle(LL, start = list(mu = 1, sigma=1))
+summary(fit)
+logLik(fit)
+confint(fit)
+
+#We can compare with a larger sample
+set.seed(1001)
+N <- 1000
+x <- rnorm(N, mean = 3, sd = 2)
+
+LL <- function(mu, sigma) {
+  R = suppressWarnings(dnorm(x, mu, sigma))
+  -sum(log(R))
+}
+fit <- mle(LL, start = list(mu = 1, sigma=1))
+
+summary(fit)
+confint(fit)
+
+#logLik(fit)
+#vcov(fit)
+#plot(profile(fit), absVal = FALSE)
+  
+#2. Comparing different models
+
+#Generate data from a gamma distribution and fit three different models:
+#normal, gamma and exponential.
+
+
+set.seed(1001)
+N <- 100
+x <- rgamma(N, shape = 3, rate = 2)
+
+hist(x)
+
+LLnorm <- function(mu, sigma) {
+  R = suppressWarnings(dnorm(x, mu, sigma))
+  -sum(log(R))
+}
+fitnorm <- mle(LLnorm, start = list(mu = 1, sigma=1))
+
+
+LLgamma <- function(shape, rate) {
+  R = suppressWarnings(dgamma(x, shape, rate))
+  -sum(log(R))
+}
+fitgamma <- mle(LLgamma, start = list(shape = 1, rate=1))
+
+LLexp <- function(rate) {
+  R = suppressWarnings(dexp(x, rate))
+  -sum(log(R))
+}
+fitexp <- mle(LLexp, start = list(rate=1))
+
+
+#Get the log-likelihood for the three models. Bigger value is the best fitting.
+c(logLik(fitnorm),logLik(fitgamma),logLik(fitexp))
+
+
+#The overall quality of the models can be looked with
+#the Akaike Information Criterion (AIC) and Bayesian Information Criterion (BIC).
+#These can be used to compare the performance of different models for a given set of data.
+#AIC deals with the trade-off between the goodness of fit of the model and the simplicity of the model.
+#AIC = 2k - 2LL
+#The better the model the smaller AIC
+
+c(AIC(fitnorm),AIC(fitgamma),AIC(fitexp))
+
+c(BIC(fitnorm),BIC(fitgamma),BIC(fitexp))
+
+

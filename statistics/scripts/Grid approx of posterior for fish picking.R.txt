@@ -1,0 +1,63 @@
+# Computing the posterior distribution
+# Grid approximation applied to the fish picking problem.
+# One of the simplest conditioning techniques is grid approximation.
+# While most parameters are continuous, capable of taking on
+# an infinite number of values, it turns out that 
+# we can achieve an excellent approximation of the continuous posterior
+# distribution by considering only a finite grid of parameter values
+
+# From a population of N_real fishes in the lake
+# 20 fishes are captured and marked.
+# One re-capture experiment is performed
+# resulting in x marked fishes.
+# x is distributed hypergeometric
+
+x = 5
+
+# define grid for the parameter (nfish)
+n_grid <- seq(20,250,5)
+
+#----- Uniform prior -----
+
+# define prior
+prior <- rep( 1 , length(n_grid) )  #uniform
+plot(n_grid, prior)
+
+# compute likelihood at each value in grid
+likelihood <- dhyper( x , m=20 , n=(n_grid-20), k=20 )
+plot(n_grid, likelihood)
+
+# compute product of likelihood and prior
+unstd.posterior <- likelihood * prior
+
+# standardize the posterior, so it sums to 1
+posterior <- unstd.posterior / sum(unstd.posterior)
+
+par(mfrow=c(1,1), mar=c(4,4,4,4))
+
+plot( p_grid , posterior , type="b" ,
+      xlab="nfish" , ylab="posterior probability" )
+
+#----- Step prior ------
+
+prior <- ifelse( n_grid < 80 , 0 , 1 )
+plot(n_grid, prior, type="b", 
+     xlab="nfish", ylab="prior probability" )
+likelihood <- dhyper( x , m=20 , n=(p_grid-20), k=20 )
+unstd.posterior <- likelihood * prior
+posterior <- unstd.posterior / sum(unstd.posterior)
+plot( p_grid , posterior , type="b" ,
+      xlab="nfish" , ylab="posterior probability" )
+
+#---- By-exponential prior -----
+
+prior <- exp( -0.05*abs( n_grid - 100 ) )
+plot(n_grid, prior, type="b" ,
+     xlab="nfish" , ylab="prior probability" )
+
+likelihood <- dhyper( x , m=20 , n=(n_grid-20), k=20 )
+unstd.posterior <- likelihood * prior
+posterior <- unstd.posterior / sum(unstd.posterior)
+plot( n_grid , posterior , type="b" ,
+      xlab="nfish" , ylab="posterior probability" )
+

@@ -1,0 +1,24 @@
+#--- Método de momentos (MM) ---
+
+mu <- 1
+sigma <- 2
+n <- 10
+
+x <- rnorm(n, mean=mu, sd=sigma)
+x
+
+#Estimador de mu por método de momentos = media muestral
+muest <- mean(x)
+muest
+sum(x)/n
+
+#Estimador de sigma por método de momentos
+sigmaest <- sqrt((sum(x^2)/n)-mean(x)^2) 
+sigmaest
+sqrt(1/(n)*(sum(x^2-mean(x)^2))) #Expresión equivalente
+sqrt(1/(n)*(sum((x-mean(x))^2))) #Expresión equivalente
+
+#Desviación estándar muestral es diferente al estimador de sigma por MM
+sd(x) 
+sqrt(1/(n-1)*(sum(x^2-mean(x)^2)))
+sqrt(1/(n-1)*(sum((x-mean(x))^2)))

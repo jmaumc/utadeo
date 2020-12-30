@@ -1,0 +1,66 @@
+#--------------------------#
+# Probabilidad condicional #
+#--------------------------#
+
+# Fumar... ¿principal causa de cáncer de pulmón?
+
+#(1) Horn, L; Pao W, Johnson DH (2012) Harrison's Principles of Internal Medicine (18th ed.). McGraw-Hill. ISBN 0-07-174889-X.
+#    -> 80-90% de pacientes con cáncer de pulmón son fumadores.
+
+#(2) Thun, MJ; Hannan LM, Adams-Campbell LL et al. (September 2008). "Lung Cancer Occurrence in Never-Smokers: An Analysis of 13 Cohorts and 22 Cancer Registry Studies". PLoS Medicine 5 (9): e185. doi:10.1371/journal.pmed.0050185. PMC 2531137. PMID 18788891.
+#    -> 10-15% pacientes con cáncer de pulmón no son ni fueron fumadores.
+
+#(3) Howlader N, Noone AM, Krapcho M, et al (eds). SEER Cancer Statistics Review, 1975-2008, National Cancer Institute. Bethesda, MD, based on November 2010 SEER data submission, posted to the SEER Web site, 2011 accessed at http://seer.cancer.gov/csr/1975_2008/ on October 14, 2011.
+#    -> 373,000 people with lung cancer in 2008.
+
+#(4) Population Reference Bureau (USA)
+#    -> 2008 US Population 304.5 million
+
+#(5) Centers for Disease Control and Prevention (USA)
+#    -> 19.3% of total population are smokers. 
+
+# F = fumador     C = cáncer de pulmón
+
+# (5) -> P(F) = 0.193
+
+# (3)/(4) -> P(C) =  0.001224959
+
+373000/304500000
+
+# P(F|C) = 0.80 a 0.90 según (1) 0.85 a 0.90 según (2)
+
+# P(C|F) = P(F|C)P(C)/P(F)
+
+0.80*0.001224959/0.193 # = 0.00507755
+
+0.85*0.001224959/0.193 # = 0.005394897
+
+0.90*0.001224959/0.193 # = 0.005712244
+
+# 0.51 - 0.57 % probabilidad de que una persona tenga
+#               cáncer de pulmon dado que es fumador
+#               en EUA, aprox 1 de cada 175-196 !!
+
+# P(C|~F) = P(~F|C)P(C)/P(~F)
+
+0.20*0.001224959/0.807 # = 0.0003035834
+
+0.15*0.001224959/0.807 # = 0.0002276875
+
+0.10*0.001224959/0.807 # = 0.0001517917
+
+# 0.02 - 0.03 % probabilidad de que una persona tenga
+#               cáncer de pulmon dado que NO es fumador
+#               en EUA.
+
+0.005077550/0.0003035834 # = 16.7
+
+0.005394897/0.0002276875 # = 23.7
+
+0.005712244/0.0001517917 # = 37.6
+
+# 17 - 38 veces más probable que un fumador tenga
+# cáncer de pulmón versus un no fumador, pero la
+# probabilidad es baja en cualquier caso.
+
+
