@@ -1,0 +1,26 @@
+LINKS:
+
+Chart-studio:
+
+https://chart-studio.plot.ly/~fran.romero.alvarez/#/
+
+====================================
+
+Azure ML Studio:
+
+https://studio.azureml.net/
+
+====================================
+
+Datos de RRHH:
+
+https://docs.google.com/spreadsheets/d/e/2PACX-1vSfE_9K1uPYtXkEA_oncBZEGne6D6uhJSBCDqASxid4jIlQiyu_Z3629s0yyhNQxxkb6Q4wnUwDtlNr/pub?gid=0&single=true&output=csv
+
+====================================
+
+Ejemplo simple en python:
+
+https://colab.research.google.com/drive/15ximv1la_WVSZyo7_hoVLHOS5xy8TGdV
+
+
+====================================
