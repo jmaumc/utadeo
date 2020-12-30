@@ -1,0 +1,71 @@
+\documentclass[11pt,letterpaper]{article}
+\bibliographystyle{amsplain}
+
+\usepackage[utf8x]{inputenc}
+\usepackage{ucs}
+\usepackage[spanish]{babel}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{url}
+\usepackage{pstricks}
+\usepackage[affil-it]{authblk}
+
+\author{J. Mauricio Mej{\'i}a Castro\thanks{\tt jesidm.mejiac@utadeo.edu.co}}
+\title{Taller de Repaso de Matemáticas}
+\affil{Universidad Jorge Tadeo Lozano}
+
+\newcommand{\dpartial}[2]{\frac{\partial#1}{\partial#2}}
+\newcommand{\upla}[2]{(#1_1,\ #1_2,\ \ldots,\ #1_{#2})}
+
+\theoremstyle{plain}
+	\newtheorem{prop}{Proposición}[section]
+	\newtheorem{teor}[prop]{Teorema}
+	\newtheorem{corol}[prop]{Corolario}
+	\newtheorem{lema}[prop]{Lema}
+
+\theoremstyle{definition}
+	\newtheorem{defi}{Definición}[section]
+	\newtheorem{ejem}{Ejemplo}
+	\newtheorem{ejer}{Ejercicio}
+
+\theoremstyle{remark}
+	\newtheorem{nota}{Nota}[section]
+	\newtheorem{notac}{Notación}
+
+\begin{document}
+
+\maketitle
+%\tableofcontents
+\newpage
+
+\section{Álgebra Lineal}
+	\subsection{Producto Punto y Norma}
+\begin{defi}[Producto punto] Sean %
+$\mathbf{x},\ \mathbf{y} \in \mathbb{R}^{n}$ $n$-vectores tales que %
+$\mathbf{x} = \upla{x}{n}$ y $\mathbf{y} = \upla{y}{n}$. %
+El {\bf producto punto}, o {\bf producto escalar} de $\mathbf{x}$ y %
+$\mathbf{y}$ es el número
+	\begin{equation}
+	\mathbf{x}\cdot \mathbf{y} = x_1y_1+\cdots +x_ny_n.
+	\end{equation}
+\par La {\bf norma}, {\bf longitud} o {\bf magnitud} de $\mathbf{x}$ es la raíz %
+cuadrada positiva
+	\begin{equation}
+	\left\| \mathbf{x} \right\| = \sqrt{ \mathbf{x} \cdot \mathbf{x} } %
+	= \left( x^2_1 + \cdots + x^2_n \right)^{1/2}.
+	\end{equation}
+\par 
+Observe que la norma siempre está definida dentro de los números reales, pues $\left\|\mathbf{u}\right\|^2$ %
+siempre es no negativo.
+\par También la {\bf distancia euclidiana} entre $\mathbf{x}$ y $\mathbf{y}$ %
+se define como 
+	\begin{equation}
+	d  \left\| \mathbf{x} - \mathbf{y} \right\|.
+	\end{equation}
+\end{defi}
+
+
+
+\end{document}
