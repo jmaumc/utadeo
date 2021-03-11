@@ -4,8 +4,7 @@
 library(tidyverse)
 
 # Importo los datos con los que voy a trabajar, en este caso el apendice C
-
-Systems<-read.csv("~/Dropbox/2020 Modelos probabilisticos y analisis de datos/Datos/AppendixC.csv")
+Systems<-read.csv("~/utadeo/statistics/workshops/ws0101/dat/appendix-c.csv")
 
 # Es aconsejable verificar la correcta importación de la tabla de datos a R, recomiendo usar:
 head(Systems, n=6) ### El encabezado de los datos, con n pueden modificar el numero de registros que quieren verificar
@@ -48,7 +47,7 @@ Data<-Systems %>%
   # Filtro los datos de los seguimientos
   filter(DataSource=="FollowUps") %>%
   # Seleccionamos solo las variables de interes: el departamento, la municipalidad y el rendimiento
-  select(Department, Municipality, Yield.kg.m2) %>%
+  dplyr::select(Department, Municipality, Yield.kg.m2) %>%
   # Filtro los datos para excluir (!=) los que corresponden al municipio de Valle de San Jose
   filter(Municipality!="ValleSanJose") %>% 
   group_by(Department, Municipality) %>%
@@ -72,10 +71,10 @@ ggplot(Data,aes(x=Municipality, y=Promedio,fill=Department, group=Department)) +
 # departamento o zona de producción. Ver código en R.
 
 # Importo los datos del anexo A
-Soil0<-read.csv("~/Dropbox/2020 Modelos probabilisticos y analisis de datos/Datos/AppendixA.csv")
+Soil0<-read.csv("~/utadeo/statistics/workshops/ws0101/dat/appendix-a.csv")
 
 # Selecciono las variables en las cuales tengo interés 
-Soil<-Soil0 %>% select(Department, pH:Sand.pct, Slope.pct) %>%
+Soil<-Soil0 %>% dplyr::select(Department, pH:Sand.pct, Slope.pct) %>%
   # Reorganizo la tabla de las variables 
   gather("Variable","value", -Department)
 
