@@ -1,0 +1,22 @@
+Fund.Name & media & mediana & coevar\\ 
+1 & Adaptation Fund & 6422814.6934375 & 6140500 & 1.05839887460325\\ 
+2 & AgResults & 6272062.396 & 6371316.5 & 0.419514520659092\\ 
+3 & CGIAR Fund & 4322947.90602446 & 1200000 & 1.96987295003119\\ 
+4 & Clean Technology Fund & 101514850.123056 & 60044160.025 & 1.11818942402305\\ 
+5 & Consultative Group on International Agricultural Research (CGIAR) Multi Donor Trust Fund & 2460193.55105455 & 854818 & 1.55179005491349\\ 
+6 & Debt Relief Trust Fund & 25078811.6531387 & 8654619.885 & 2.19967045601365\\ 
+7 & EBRD Southern and Eastern Mediterranean Trust Fund & 1e+07 & 1e+07 & NA\\ 
+8 & Global Agriculture and Food Security Program & 36266497.4022222 & 13720275 & 1.35591547976997\\ 
+9 & Global Alliance for Vaccines and Immunizations (GAVI) Trust Fund & 55675512.3885714 & 73381615.21 & 0.658985137386891\\ 
+10 & Global Environment Facility & 14115423.617036 & 4e+06 & 1.5787187296428\\ 
+11 & Global Partnership for Education Fund & 22276308.535 & 13307217.915 & 1.09467967293911\\ 
+12 & Green Climate Fund Trust Fund & 2111320.07375 & 720114.26 & 2.52382963324726\\ 
+13 & Guyana REDD-Plus Investment Fund & 34915004.93 & 34915004.93 & 0.184676492102582\\ 
+14 & Haiti Reconstruction Fund & 12291991.6467742 & 3750262.51 & 1.88987532905738\\ 
+15 & International Finance Facility for Immunization / GFA & 15110131.4908046 & 11382232.23 & 0.903114225969818\\ 
+16 & Middle East and North Africa Transition Fund & 7284337.17894737 & 5e+06 & 0.81964481530067\\ 
+17 & Nagoya Protocol Implementation Fund & 2675150.43666667 & 778887.815 & 1.75567681992222\\ 
+18 & Special Climate Change Fund & 2813869.58733333 & 1299000 & 1.6441309397196\\ 
+19 & Strategic Climate Fund & 24071724.0106667 & 9999973 & 1.77543842900964\\ 
+20 & The Global Fund to Fight AIDS, Tuberculosis, and Malaria & 35231781.3867587 & 4913602.49 & 2.46888908906228\\ 
+21 & Trust Fund for the Least Developed Countries Fund for Climate Change & 5898568.31028777 & 2e+06 & 1.81735832609198\\ 

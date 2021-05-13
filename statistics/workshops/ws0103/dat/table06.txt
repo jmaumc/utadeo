@@ -1,0 +1,7 @@
+Sector.Theme & media & mediana & coevar\\ 
+1 & Agriculture and Food Security & 7655066.43194969 & 1916250 & 2.58445325933912\\ 
+2 & Education & 2e+07 & 2e+07 & NA\\ 
+3 & Environment/Climate Change & 45029489.8762105 & 31852500 & 1.12682188928749\\ 
+4 & Health & 173595728.503425 & 78801700 & 1.18725427339657\\ 
+5 & Natural Disasters & 38070254.1 & 14283350 & 1.4494478853066\\ 
+6 & Other & 140766574.323182 & 108150000 & 0.902708282248956\\ 
