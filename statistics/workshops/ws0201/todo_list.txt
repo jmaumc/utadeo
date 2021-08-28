@@ -1,0 +1,37 @@
+
+Pasos a incuir
+--------------
+1. Exploración de los datos
+	- Seleccionar variables más importantes
+	- Histogramas
+	- Diagramas de cajas
+2. Preparar primer modelo M1 (regresión lineal compuesta)
+	- Interpretar los coeficientes en términos del problema
+3. Residuales de M1
+	- Graficar residuales
+	- Obtener variación residual
+	- Interpretar resultado
+4. Coeficiente de determinación para M1
+	- Graficar
+	- Calcular coeficiente de determinación ajustado
+	- Interpretar resultado
+5. Inferencia *
+	- Inteervalos de confianza para los parametros
+	- Intervalo de confianza para la predicción
+	- Graficar
+	- Interpretar
+6. Prueba de hipótesis para comparar modelos *
+	- Prueba para todas las variables independientes
+	- Prueba para una sola variable independiente
+	- Probar subespacio
+7. Diagnóstico del modelo de regresión
+	- Variación de supuestos del error *
+	- Graficar 
+	- Comprobar que cumplan las tres condiciones
+	- Evaluar normalidad de los residuales con qq-plot *
+	- Verificar que los errores sean independientes
+	- Identificar valores atípicos, con leverage (half-normal) e influyentes
+	- Verificar estructura del modelo
+	- Error en los predictores *
+	- Colinealidad *
+	- Verificar bondad de ajuste a través del cuadrado medio del error *
