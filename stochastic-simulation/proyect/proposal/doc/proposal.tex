@@ -26,9 +26,33 @@
 	\section{Descripción del problema}
 	Hola \cite{ross2014introduction}
 		\subsection{Contexto}
+		En un juego de \textit{squash} participan dos jugadores: el jugador 1 y el jugador 2. El juego consiste en una secuencia de puntos. Si el jugador $i$ sirve y gana el punto, entonces su puntaje aumenta en 1 y retiene el servicio (para $i=$1 o 2). Si el jugador sirve y pierde el punto, entonces el servicio se transfiere al otro jugador y su puntaje permanece igual.
+		
+		El ganador es la primera persona en alcanzar 9, a menos que todos alcanzen 8 puntos primero. Cuando todos los jugadores alcanzan 8 puntos, el juego continua hasta que alguno logre estar dos puntos por delante. En ese caso, este jugador es el ganador.
+		Se propone simular un juego de squash y estimar la probabiblidad de que el jugador 1 gane. Este proyecto es tomado del Capitulo 12 en \cite{jones2009introduction}.
+		
 		\subsection{Estado del arte}
+		Varios autories han aplicado metdodos de simulacion estocastica para estimar la probabilidad de ganar en ciertos deportes. Por ejemplo, una investigacion similar a la del proyecto aca propuesto y llevada a cabo por McGarry y Granks \cite{mcgarry1994stochastic}, trata de predecir el desempeno de los jugadores de squash basado en el analisis de juegos anteriores.
+		
+		Min et al. \cite{min2008compound} proponene un framework para la prediccion de resultados en futbol a traves de inferencia Bayesiana y razonamiento basado en reglas. Tambien utilizan una aproximacion basada en series de tiempo con conocimieto obtenido del juego. Como resultado los autores afirman obtener predicciones razonables y estables.
+		
+		En un trabajo de Weninger y Lames \cite{wenninger2016performance} se propone la estimacion de la probabilidad de ganar en  el tenis. Con ello se buscaba disenar estrategias de juego y tacticas que perminitieran mejorar el desempeno de los jugadores. Como resultado conlueyn que los errores y los partidos largos tienen gran impacto en la probabilidad de perder el partido.
+		
 	\section{Objetivo general}
+	Simular un juego de \textit{squash} y estimar la probabilidad de que el jugador 1 gane.
 	\section{Metodología}
+	f
+	Se define:
+	\begin{gather}
+		a = \mathbb{P}(\text{jugador 1 gana un punto}\,|\,\text{jugador 1 sirve})\\
+		b = \mathbb{P}(\text{jugador 1 gana un punto}\,|\,\text{jugador 2 sirve})\\
+		x = \text{puntaje del jugador 1}\\
+		y = \text{puntaje del jugador 2}\\
+		z = \begin{cases}
+			1 & \text{si el jugador 1 tiene el servicio}\\
+			2 & \text{si el jugador 2 tiene el servicio\text{.}}
+		\end{cases} 
+	\end{gather}
 		\subsection{Planteamiento del modelo}
 		\subsection{Diseño experimental}
 	\bibliographystyle{plain}
