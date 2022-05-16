@@ -15,7 +15,7 @@
 	\usefont{OT1}{bch}{b}{n}
 	\normalfont \normalsize \textsc{Universidad de Bogotá Jorge Tadeo Lozano} \\ [25pt]
 	\horrule{0.5pt} \\[0.4cm]
-	\huge Simulación Estocástica \\ Propuesta Proyecto de Curso \\
+	\huge Simulación Estocástica \\ Propuesta para Proyecto de Curso \\
 	\horrule{2pt} \\[0.5cm]
 }
 \author{Mauricio Mejía Castro}
@@ -24,37 +24,58 @@
 	\tableofcontents
 	
 	\section{Descripción del problema}
-	Hola \cite{ross2014introduction}
 		\subsection{Contexto}
 		En un juego de \textit{squash} participan dos jugadores: el jugador 1 y el jugador 2. El juego consiste en una secuencia de puntos. Si el jugador $i$ sirve y gana el punto, entonces su puntaje aumenta en 1 y retiene el servicio (para $i=$1 o 2). Si el jugador sirve y pierde el punto, entonces el servicio se transfiere al otro jugador y su puntaje permanece igual.
 		
-		El ganador es la primera persona en alcanzar 9, a menos que todos alcanzen 8 puntos primero. Cuando todos los jugadores alcanzan 8 puntos, el juego continua hasta que alguno logre estar dos puntos por delante. En ese caso, este jugador es el ganador.
-		Se propone simular un juego de squash y estimar la probabiblidad de que el jugador 1 gane. Este proyecto es tomado del Capitulo 12 en \cite{jones2009introduction}.
+		El ganador es la primera persona en alcanzar 9, a menos que todos alcancen 8 puntos primero. Cuando todos los jugadores alcanzan 8 puntos, el juego continua hasta que alguno logre estar dos puntos por delante. En ese caso, este jugador es el ganador.
+		
+		Se propone simular un juego de \textit{squash} y estimar la probabilidad de que el jugador 1 gane. Este proyecto y su descripción son tomados del libro de Jones, capítulo 12 \cite{jones2009introduction}.
 		
 		\subsection{Estado del arte}
-		Varios autories han aplicado metdodos de simulacion estocastica para estimar la probabilidad de ganar en ciertos deportes. Por ejemplo, una investigacion similar a la del proyecto aca propuesto y llevada a cabo por McGarry y Granks \cite{mcgarry1994stochastic}, trata de predecir el desempeno de los jugadores de squash basado en el analisis de juegos anteriores.
+		Varios autores han aplicado métodos de simulación estocástica para estimar la probabilidad de ganar en ciertos deportes. Por ejemplo, una investigación similar a la del proyecto acá propuesto y llevada a cabo por McGarry y Granks \cite{mcgarry1994stochastic}, trata de predecir el desempeño de los jugadores de \textit{squash} basado en el análisis de juegos anteriores.
 		
-		Min et al. \cite{min2008compound} proponene un framework para la prediccion de resultados en futbol a traves de inferencia Bayesiana y razonamiento basado en reglas. Tambien utilizan una aproximacion basada en series de tiempo con conocimieto obtenido del juego. Como resultado los autores afirman obtener predicciones razonables y estables.
+		Min et al. \cite{min2008compound} proponen un \textit{framework} para la predicción de resultados en el futbol a través de inferencia Bayesiana y razonamiento basado en reglas. También utilizan una aproximación basada en series de tiempo con conocimiento obtenido del juego. Como resultado los autores afirman obtener predicciones razonables y estables.
 		
-		En un trabajo de Weninger y Lames \cite{wenninger2016performance} se propone la estimacion de la probabilidad de ganar en  el tenis. Con ello se buscaba disenar estrategias de juego y tacticas que perminitieran mejorar el desempeno de los jugadores. Como resultado conlueyn que los errores y los partidos largos tienen gran impacto en la probabilidad de perder el partido.
+		En otro trabajo de Weninger y Lames \cite{wenninger2016performance} se propone la estimación de la probabilidad de ganar en  el tenis. Con ello se buscaba diseñar estrategias de juego y tácticas que permitieran mejorar el desempeño de los jugadores. Como resultado concluyeron que los errores y los partidos largos tienen gran impacto en la probabilidad de perder el partido.
 		
-	\section{Objetivo general}
-	Simular un juego de \textit{squash} y estimar la probabilidad de que el jugador 1 gane.
+	\section{Objetivos}
+	\begin{itemize}
+		\item Simular un juego de \textit{squash} y estimar la probabilidad de que el jugador 1 gane el juego.
+		\item Diseñar una estrategia que permita mejorar la probabilidad de que el jugador 1 gane el juego.
+	\end{itemize}
+	
+	
 	\section{Metodología}
-	f
-	Se define:
-	\begin{gather}
-		a = \mathbb{P}(\text{jugador 1 gana un punto}\,|\,\text{jugador 1 sirve})\\
-		b = \mathbb{P}(\text{jugador 1 gana un punto}\,|\,\text{jugador 2 sirve})\\
-		x = \text{puntaje del jugador 1}\\
-		y = \text{puntaje del jugador 2}\\
-		z = \begin{cases}
-			1 & \text{si el jugador 1 tiene el servicio}\\
-			2 & \text{si el jugador 2 tiene el servicio\text{.}}
-		\end{cases} 
-	\end{gather}
+	Se seguirán las etapas propias de un estudio de simulación:
+	\begin{enumerate}
+		\item Formulación del problema: Se identifican las necesidades a resolver.
+		\item Formulación de objetivos y plan de trabajo: Se definen los objetivos del estudio de simulación y los pasos necesarios para llevarlo a cabo con éxito.
+		%\item Recolección de datos
+		\item Conceptualización del modelo: se entiende como se comporta el sistema y los requerimientos básicos para encontrar el modelo adecuado.
+		\item Construcción del modelo: Se traduce el modelo a un lenguaje de programación.
+		\item Verificación y validación: Se verifica que el modelo se comporte como se definió. La validación asegura que no existe diferencia significativa entre el modelo y el sistema real, de manera que el modelo refleje la realidad.
+		\item Diseño experimental y ejecución: Involucra el desarrollo de modelos alternativos, ejecutar las corridas y comparar estadísticamente loas alternativas.
+		\item Documentación y reportes: se realizá un reporte final y una presentación con los resultados.
+	\end{enumerate}
+	
 		\subsection{Planteamiento del modelo}
+		Se define:
+		\begin{gather}
+			a = \mathbb{P}(\text{jugador 1 gana un punto}\,|\,\text{jugador 1 sirve})\\
+			b = \mathbb{P}(\text{jugador 1 gana un punto}\,|\,\text{jugador 2 sirve})\\
+			x = \text{puntaje del jugador 1}\\
+			y = \text{puntaje del jugador 2}\\
+			z = \begin{cases}
+				1 & \text{si el jugador 1 tiene el servicio}\\
+				2 & \text{si el jugador 2 tiene el servicio\text{.}}
+			\end{cases} 
+		\end{gather}
 		\subsection{Diseño experimental}
+		Se utilizará el lenguaje R para implementar el proceso de simulación.
+		
+		Se deberá tener una función \texttt{status(x, y)} que toma los puntajes $x$ y $y$ y retorna una de las siguientes cadenas: \texttt{``unfinished''} si el juego aun no ha terminado, \texttt{``player 1 win''} si el jugador 1 ganó el juego, \texttt{``player 2 win''} si el jugador 2 ganó el juego o \texttt{``impossible''} si $x$ y $y$ son puntajes imposibles.
+		
+		Se deberá codificar una función \texttt{play\_game()} que simule una partida de \textit{squash} y retorne \texttt{TRUE} si el jugador 1 gana o \texttt{FALSO} en otro caso.
 	\bibliographystyle{plain}
 	\bibliography{proposal}
 	
